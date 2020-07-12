@@ -1,1 +1,1 @@
-export {BookInfo} from './BookInfo'
+export { TrendViewer } from "./TrendViewer";

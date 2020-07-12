@@ -1,33 +1,52 @@
 import { ApolloServer, gql } from "apollo-server-micro";
 
-let book = {
-  name: "The Hungarian Sausage",
-  author: "Ben Grunfeld",
-};
+// 0,2020-04-01 0:00:40,31.58865,0.1,0
+// 1,2020-04-01 0:01:40,31.57181667,0.1392339101,0
+// 2,2020-04-01 0:02:40,32.41963333,0.2058788801,1
+
+const points = [
+  {
+    id: "0",
+    timestamp: "2020-04-01 0:00:40",
+    value1: "31.58865",
+    value2: "0.1",
+    value3: "0",
+  },
+  {
+    id: "1",
+    timestamp: "2020-04-01 0:01:40",
+    value1: "31.57181667",
+    value2: "0.1392339101",
+    value3: "0",
+  },
+  {
+    id: "2",
+    timestamp: "2020-04-01 0:02:40",
+    value1: "31.41963333",
+    value2: "0.2058788801",
+    value3: "1",
+  },
+];
 
 const typeDefs = gql`
-  type Book {
-    name: String
-    author: String
+  type Point {
+    id: ID
+    timestamp: String
+    value1: String
+    value2: String
+    value3: String
   }
+
   type Query {
-    book: Book
-  }
-  type Mutation {
-    updateBook(name: String!, author: String!): Book
+    points(startDateTime: String, endDateTime: String): [Point]
   }
 `;
 
 const resolvers = {
   Query: {
-    book: () => book,
-  },
-
-  Mutation: {
-    updateBook: (root, args) => {
-      book.name = args.name;
-      book.author = args.author;
-      return book;
+    points: (parent, args) => {
+      console.log(args);
+      return points;
     },
   },
 };
