@@ -18,7 +18,7 @@ const TrendViewer = () => {
   const [getDataPoints, { called, loading, error, data }] = useLazyQuery(
     GET_DATA_POINTS,
     {
-      variables: { start: "startDefault", end: "endDefault" },
+      variables: { start: "false", end: "false" },
     }
   );
 
@@ -34,10 +34,12 @@ const TrendViewer = () => {
   }
 
   return (
-    <div>
-      <h1>Trend Viewer</h1>
-      <p></p>
-    </div>
+    <Viewer>
+      <Chart />
+      <NavButtons />
+      <DateSelection />
+      <AxisSelection />
+    </Viewer>
   );
 };
 

@@ -3,7 +3,7 @@ import { promises as fs } from "fs";
 import { ApolloServer, gql } from "apollo-server-micro";
 import parse from "csv-parse/lib/sync";
 
-const getCsv = async () => {
+const getCsvData = async () => {
   const content = await fs.readFile("./data/ts-data.csv");
   const records = parse(content);
 
@@ -39,9 +39,12 @@ const typeDefs = gql`
 const resolvers = {
   Query: {
     points: async (parent, args) => {
-      // console.log(args.startDateTime, args.endDateTime);
+      console.log(args);
+      console.log("------>>>>>");
 
-      return await getCsv();
+      const data = await getCsvData();
+
+      return data;
     },
   },
 };
