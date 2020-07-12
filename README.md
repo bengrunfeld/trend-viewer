@@ -1,6 +1,6 @@
-# Noughty Crosses
+# Clostra App
 
-This is a game of tic-tac-toe written in Javascript. The name Noughty Crosses is a pun on the British version of the game's name - Noughts and Crosses.
+Clostra App
 
 ## Installation
 
@@ -16,5 +16,5 @@ The game uses React inside of NextJS for the view. One advantage of using NextJS
 
 Google Fonts
 
--   Bangers
--   Galada
+- Bangers
+- Galada
