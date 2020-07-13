@@ -1,11 +1,13 @@
 import styled from "styled-components";
 
-export const UpdateButton = styled.button`
-  padding: 15px;
-  background: darkblue;
-`;
+export const Viewer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
-export const Title = styled.h2`
-  font-family: "Bangers", cursive;
-  color: ${({ theme }) => theme.colors.gray};
+  > * {
+    width: 100%;
+    max-width: 1000px;
+    margin-top: 25px;
+  }
 `;

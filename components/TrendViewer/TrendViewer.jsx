@@ -2,6 +2,10 @@ import { useEffect } from "react";
 import { useLazyQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
 
+import { Chart, NavButtons, SignalSelection } from "../";
+
+import { Viewer } from "./TrendViewer.styles";
+
 const GET_DATA_POINTS = gql`
   query DataPoints($start: String, $end: String) {
     points(startDateTime: $start, endDateTime: $end) {
@@ -37,8 +41,7 @@ const TrendViewer = () => {
     <Viewer>
       <Chart />
       <NavButtons />
-      <DateSelection />
-      <AxisSelection />
+      <SignalSelection />
     </Viewer>
   );
 };

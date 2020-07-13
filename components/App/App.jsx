@@ -1,4 +1,4 @@
-import { TrendViewer } from "../";
+import { TrendViewer, TitleBar } from "../";
 import { PageLayout } from "./App.styles";
 
 const App = () => (
