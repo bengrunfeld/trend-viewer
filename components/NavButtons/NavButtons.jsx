@@ -6,19 +6,28 @@ import {
   NavButton,
 } from "./NavButtons.styles";
 
-const NavButtons = () => (
+const NavButtons = ({
+  resetAll,
+  panLeftOne,
+  panRightOne,
+  panLeftMany,
+  panRightMany,
+  zoomIn,
+  zoomOut,
+}) => (
   <NavContainer>
     <LeftButtons>
-      <NavButton>L</NavButton>
-      <NavButton>LL</NavButton>
+      <NavButton onClick={panLeftMany}>LL</NavButton>
+      <NavButton onClick={panLeftOne}>L</NavButton>
     </LeftButtons>
     <CenterButtons>
-      <NavButton>Zoom In</NavButton>
-      <NavButton>Zoom Out</NavButton>
+      <NavButton onClick={resetAll}>Reset All</NavButton>
+      <NavButton onClick={zoomIn}>Zoom In</NavButton>
+      <NavButton onClick={zoomOut}>Zoom Out</NavButton>
     </CenterButtons>
     <RightButtons>
-      <NavButton>R</NavButton>
-      <NavButton>RR</NavButton>
+      <NavButton onClick={panRightOne}>R</NavButton>
+      <NavButton onClick={panRightMany}>RR</NavButton>
     </RightButtons>
   </NavContainer>
 );

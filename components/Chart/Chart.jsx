@@ -32,7 +32,9 @@ const Chart = ({
       .range([10, 970]);
 
   const createYScale = val =>
-    scaleLinear().domain([val.min, val.max]).range([0, 375]);
+    scaleLinear()
+      .domain([val.min, val.max])
+      .range([0, 375]);
 
   let minMax = {
     value1: { min: false, max: false },

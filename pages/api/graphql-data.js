@@ -39,9 +39,6 @@ const typeDefs = gql`
 const resolvers = {
   Query: {
     points: async (parent, args) => {
-      console.log(args);
-      console.log("------>>>>>");
-
       const data = await getCsvData();
 
       return data;
