@@ -1,6 +1,6 @@
-# Clostra App
+# Trend Viewer
 
-Clostra App Trend Viewer
+And interactive trend viewer
 
 ## Installation
 
@@ -14,7 +14,7 @@ The game uses React inside of NextJS for the view. One advantage of using NextJS
 
 ## Typeography
 
-Google Fonts
+Google Fonts:
 
 - Bangers
 - Galada
