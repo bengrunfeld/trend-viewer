@@ -1,10 +1,5 @@
 import { useRef, useEffect } from "react";
-import {
-  ChartContainer,
-  SignalContainer,
-  Point,
-  Wrapper,
-} from "./Chart.styles";
+import { ChartContainer, SignalContainer, Point } from "./Chart.styles";
 
 import { scaleLinear } from "d3";
 
@@ -21,7 +16,12 @@ const Chart = ({ signals, setCurrentValue, setChartWidth }) => {
 
   if (!signals) return <div></div>;
 
-  const createScale = val =>
+  const createXScale = signals =>
+    scaleLinear()
+      .domain([0, signals.length - 1])
+      .range([10, 970]);
+
+  const createYScale = val =>
     scaleLinear().domain([val.min, val.max]).range([0, 375]);
 
   let minMax = {
@@ -66,51 +66,56 @@ const Chart = ({ signals, setCurrentValue, setChartWidth }) => {
       item.value3 > minMax.value3.max ? item.value3 : minMax.value3.max;
   });
 
-  console.log(minMax);
+  const scaleX = createXScale(signals);
 
-  const scaleVal1 = createScale(minMax.value1);
-  const scaleVal2 = createScale(minMax.value2);
-  const scaleVal3 = createScale(minMax.value3);
+  const scaleVal1 = createYScale(minMax.value1);
+  const scaleVal2 = createYScale(minMax.value2);
+  const scaleVal3 = createYScale(minMax.value3);
 
   return (
     <ChartContainer ref={ref}>
-      <Wrapper num={0}>
-        <SignalContainer>
-          {signals.map((item, i) => {
-            console.log(
-              item.value1,
-              scaleVal1(item.value1),
-              item.value2,
-              scaleVal2(item.value2),
-              item.value3,
-              scaleVal3(item.value3)
-            );
-            return (
-              <Point yPos={scaleVal1(item.value1)} key={item.id} sigNum={0} />
-            );
-          })}
-        </SignalContainer>
-      </Wrapper>
+      <SignalContainer>
+        {signals.map((item, i) => {
+          console.log(scaleX(i));
+          return (
+            <Point
+              xPos={scaleX(i)}
+              yPos={scaleVal1(item.value1)}
+              key={item.id}
+              sigNum={0}
+              onMouseEnter={setCurrentValue.bind("", item)}
+            />
+          );
+        })}
+      </SignalContainer>
 
-      <Wrapper num={1}>
-        <SignalContainer>
-          {signals.map((item, i) => {
-            return (
-              <Point yPos={scaleVal2(item.value2)} key={item.id} sigNum={1} />
-            );
-          })}
-        </SignalContainer>
-      </Wrapper>
+      <SignalContainer>
+        {signals.map((item, i) => {
+          return (
+            <Point
+              xPos={scaleX(i)}
+              yPos={scaleVal2(item.value2)}
+              key={item.id}
+              sigNum={1}
+              onMouseEnter={setCurrentValue.bind("", item)}
+            />
+          );
+        })}
+      </SignalContainer>
 
-      <Wrapper num={2}>
-        <SignalContainer>
-          {signals.map((item, i) => {
-            return (
-              <Point yPos={scaleVal3(item.value3)} key={item.id} sigNum={2} />
-            );
-          })}
-        </SignalContainer>
-      </Wrapper>
+      <SignalContainer>
+        {signals.map((item, i) => {
+          return (
+            <Point
+              xPos={scaleX(i)}
+              yPos={scaleVal3(item.value3)}
+              key={item.id}
+              sigNum={2}
+              onMouseEnter={setCurrentValue.bind("", item)}
+            />
+          );
+        })}
+      </SignalContainer>
     </ChartContainer>
   );
 };

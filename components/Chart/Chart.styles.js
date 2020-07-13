@@ -5,33 +5,25 @@ export const ChartContainer = styled.div`
   border: 3px solid ${({ theme }) => theme.colors.gray};
   border-radius: 3px;
   box-sizing: border-box;
-`;
-
-export const Wrapper = styled.div`
-  position: relative;
-  height: 400px;
-  padding: 0 5px;
-  top: ${({ num }) => `-${400 * num}px`};
+  cursor: default;
 `;
 
 export const SignalContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  height: 400px;
   position: relative;
-  top: 380px;
 `;
 
 export const Point = styled.div`
-  width: 0;
-  height: 0;
-  padding: 5px;
+  width: 10px;
+  height: 10px;
   border-radius: 5px;
-  position: relative;
-  bottom: ${({ yPos }) => `${yPos}px`};
+  position: absolute;
+  left: ${({ xPos }) => `${xPos}px`};
+  top: ${({ yPos }) => `${380 - yPos}px`};
   background: ${({ sigNum }) => {
     if (sigNum === 0) return "red";
     if (sigNum === 1) return "green";
     if (sigNum === 2) return "blue";
   }};
 `;
+
+// top:
