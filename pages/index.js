@@ -1,6 +1,6 @@
 import { ApolloProvider } from "@apollo/react-hooks";
 import ApolloClient, { gql } from "apollo-boost";
-import { TrendViewer } from "../components";
+import { App } from "../components";
 
 const Home = ({ data }) => {
   const client = new ApolloClient({
@@ -9,7 +9,7 @@ const Home = ({ data }) => {
 
   return (
     <ApolloProvider client={client}>
-      <TrendViewer />
+      <App />
     </ApolloProvider>
   );
 };

@@ -1,43 +1,71 @@
-import { useEffect } from "react";
-import { useLazyQuery } from "@apollo/react-hooks";
-import { gql } from "apollo-boost";
+import { useState, useEffect } from "react";
 
-const GET_DATA_POINTS = gql`
-  query DataPoints($start: String, $end: String) {
-    points(startDateTime: $start, endDateTime: $end) {
-      id
-      timestamp
-      value1
-      value2
-      value3
-    }
-  }
-`;
+import { Chart, CurrentValue, NavButtons, SignalSelection } from "../";
+import { Viewer } from "./TrendViewer.styles";
 
-const TrendViewer = () => {
-  const [getDataPoints, { called, loading, error, data }] = useLazyQuery(
-    GET_DATA_POINTS,
-    {
-      variables: { start: "startDefault", end: "endDefault" },
-    }
-  );
+const TrendViewer = ({ data, loading, called, error }) => {
+  const [signals, setSignals] = useState(false);
+  const [currentValue, setCurrentValue] = useState(false);
+  const [chartWidth, setChartWidth] = useState(false);
+  const [signalFilter, setSignalFilter] = useState("all");
+  const [signalValueFilter, setSignalValueFilter] = useState(false);
 
-  // if (called && loading) return <p>Loading...</p>;
-  // if (error) return <p>Error :(</p>;
+  const initialData = data?.points.slice(0, 10);
 
   useEffect(() => {
-    getDataPoints({ variables: { start: "now" } });
-  }, []);
+    if (!loading && data) {
+      setSignals(initialData);
+    }
+  }, [loading, data]);
 
-  if (data) {
-    console.log(data);
-  }
+  if (called && loading) return <p>Loading...</p>;
+  if (error) return <p>Error</p>;
+
+  const resetAll = () => {
+    setSignals(initialData);
+  };
+
+  const panLeftOne = () => {
+    setSignals(data);
+  };
+
+  const panRightOne = () => {
+    setSignals(data);
+  };
+
+  const panLeftMany = n => {
+    setSignals(data);
+  };
+
+  const panRightMany = n => {
+    setSignals(data);
+  };
+
+  const zoomIn = n => {
+    setSignals(data);
+  };
+
+  const zoomOut = n => {
+    setSignals(data);
+  };
 
   return (
-    <div>
-      <h1>Trend Viewer</h1>
-      <p></p>
-    </div>
+    <Viewer>
+      <Chart
+        signals={signals}
+        setCurrentValue={setCurrentValue}
+        setChartWidth={setChartWidth}
+        signalFilter={signalFilter}
+        signalValueFilter={signalValueFilter}
+      />
+      <NavButtons signals={signals} setSignals={setSignals} />
+      <CurrentValue currentValue={currentValue} />
+      <SignalSelection
+        signals={signals}
+        setSignalFilter={setSignalFilter}
+        setSignalValueFilter={setSignalValueFilter}
+      />
+    </Viewer>
   );
 };
 

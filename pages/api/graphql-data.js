@@ -1,32 +1,26 @@
+import { promises as fs } from "fs";
+
 import { ApolloServer, gql } from "apollo-server-micro";
+import parse from "csv-parse/lib/sync";
 
-// 0,2020-04-01 0:00:40,31.58865,0.1,0
-// 1,2020-04-01 0:01:40,31.57181667,0.1392339101,0
-// 2,2020-04-01 0:02:40,32.41963333,0.2058788801,1
+const getCsvData = async () => {
+  const content = await fs.readFile("./data/ts-data.csv");
+  const records = parse(content);
 
-const points = [
-  {
-    id: "0",
-    timestamp: "2020-04-01 0:00:40",
-    value1: "31.58865",
-    value2: "0.1",
-    value3: "0",
-  },
-  {
-    id: "1",
-    timestamp: "2020-04-01 0:01:40",
-    value1: "31.57181667",
-    value2: "0.1392339101",
-    value3: "0",
-  },
-  {
-    id: "2",
-    timestamp: "2020-04-01 0:02:40",
-    value1: "31.41963333",
-    value2: "0.2058788801",
-    value3: "1",
-  },
-];
+  const data = records.map((item, i) => {
+    if (i === 0) return;
+
+    return {
+      id: item[0],
+      timestamp: item[1],
+      value1: item[2],
+      value2: item[3],
+      value3: item[4],
+    };
+  });
+
+  return data.slice(1);
+};
 
 const typeDefs = gql`
   type Point {
@@ -44,9 +38,13 @@ const typeDefs = gql`
 
 const resolvers = {
   Query: {
-    points: (parent, args) => {
+    points: async (parent, args) => {
       console.log(args);
-      return points;
+      console.log("------>>>>>");
+
+      const data = await getCsvData();
+
+      return data;
     },
   },
 };
