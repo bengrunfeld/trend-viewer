@@ -19,8 +19,6 @@ const TrendViewer = ({ data, loading, called, error }) => {
   if (called && loading) return <p>Loading...</p>;
   if (error) return <p>Error</p>;
 
-  console.log("C: ", chartWidth);
-
   const resetAll = () => {
     setSignals(initialData);
   };
