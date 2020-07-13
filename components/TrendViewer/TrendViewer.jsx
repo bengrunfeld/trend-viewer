@@ -1,47 +1,25 @@
-import { useEffect } from "react";
-import { useLazyQuery } from "@apollo/react-hooks";
-import { gql } from "apollo-boost";
+import { useState, useEffect } from "react";
 
 import { Chart, NavButtons, SignalSelection } from "../";
-
 import { Viewer } from "./TrendViewer.styles";
 
-const GET_DATA_POINTS = gql`
-  query DataPoints($start: String, $end: String) {
-    points(startDateTime: $start, endDateTime: $end) {
-      id
-      timestamp
-      value1
-      value2
-      value3
-    }
-  }
-`;
-
-const TrendViewer = () => {
-  const [getDataPoints, { called, loading, error, data }] = useLazyQuery(
-    GET_DATA_POINTS,
-    {
-      variables: { start: "false", end: "false" },
-    }
-  );
-
-  // if (called && loading) return <p>Loading...</p>;
-  // if (error) return <p>Error :(</p>;
+const TrendViewer = ({ data, loading, called, error }) => {
+  const [signals, setSignals] = useState(data);
 
   useEffect(() => {
-    getDataPoints({ variables: { start: "now" } });
-  }, []);
+    if (!loading && data) {
+      setSignals(data);
+    }
+  }, [loading, data]);
 
-  if (data) {
-    console.log(data);
-  }
+  if (called && loading) return <p>Loading...</p>;
+  if (error) return <p>Error</p>;
 
   return (
     <Viewer>
-      <Chart />
-      <NavButtons />
-      <SignalSelection />
+      <Chart signals={signals} />
+      <NavButtons signals={signals} setSignals={setSignals} />
+      <SignalSelection signals={signals} setSignals={setSignals} />
     </Viewer>
   );
 };

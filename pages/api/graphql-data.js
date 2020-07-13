@@ -7,9 +7,7 @@ const getCsvData = async () => {
   const content = await fs.readFile("./data/ts-data.csv");
   const records = parse(content);
 
-  const output = [];
-
-  return records.map((item, i) => {
+  const data = records.map((item, i) => {
     if (i === 0) return;
 
     return {
@@ -20,6 +18,8 @@ const getCsvData = async () => {
       value3: item[4],
     };
   });
+
+  return data.slice(1);
 };
 
 const typeDefs = gql`
