@@ -9,12 +9,11 @@ const TrendViewer = ({ data, loading, called, error }) => {
   const [chartWidth, setChartWidth] = useState(false);
   const [signalFilter, setSignalFilter] = useState("all");
   const [signalValueFilter, setSignalValueFilter] = useState(false);
-
-  const initialData = data?.points.slice(0, 10);
+  const [arr, setArrIndicies] = useState({ start: 0, end: 10 });
 
   useEffect(() => {
     if (!loading && data) {
-      setSignals(initialData);
+      setSignals(data?.points.slice(arr.start, arr.end));
     }
   }, [loading, data]);
 
@@ -22,31 +21,71 @@ const TrendViewer = ({ data, loading, called, error }) => {
   if (error) return <p>Error</p>;
 
   const resetAll = () => {
-    setSignals(initialData);
+    setSignals(data?.points.slice(0, 10));
+    setArrIndicies({ start: 0, end: 10 });
+    console.log("RA: ", arr.start, arr.end);
   };
 
   const panLeftOne = () => {
-    setSignals(data);
+    if (arr.start === 0) return;
+
+    setSignals(data?.points.slice(arr.start - 1, arr.end - 1));
+    setArrIndicies({ start: arr.start - 1, end: arr.end - 1 });
+    console.log("PLO: ", arr.start, arr.end);
   };
 
   const panRightOne = () => {
-    setSignals(data);
+    if (arr.end === data.length - 1) return;
+
+    setSignals(data?.points.slice(arr.start + 1, arr.end + 1));
+    setArrIndicies({ start: arr.start + 1, end: arr.end + 1 });
+    console.log("PRO: ", arr.start, arr.end);
   };
 
   const panLeftMany = n => {
-    setSignals(data);
+    if (arr.start - signals.length < 0) return;
+
+    setSignals(
+      data?.points.slice(arr.start - signals.length, arr.end - signals.length)
+    );
+    setArrIndicies({
+      start: arr.start - signals.length,
+      end: arr.end - signals.length,
+    });
+
+    console.log("PLM: ", arr.start, arr.end);
   };
 
   const panRightMany = n => {
-    setSignals(data);
+    if (arr.end + signals.length > data.length - 1) return;
+
+    setSignals(
+      data?.points.slice(arr.start + signals.length, arr.end + signals.length)
+    );
+    setArrIndicies({
+      start: arr.start + signals.length,
+      end: arr.end + signals.length,
+    });
+
+    console.log("PRM: ", arr.start, arr.end);
   };
 
   const zoomIn = n => {
-    setSignals(data);
+    if (signals.length < 4) return;
+
+    setSignals(data?.points.slice(arr.start, arr.end - 1));
+    setArrIndicies({ start: arr.start, end: arr.end - 1 });
+
+    console.log("ZI: ", arr.start, arr.end);
   };
 
   const zoomOut = n => {
-    setSignals(data);
+    if (arr.end === data.length - 1) return;
+
+    setSignals(data?.points.slice(arr.start, arr.end + 1));
+    setArrIndicies({ start: arr.start, end: arr.end + 1 });
+
+    console.log("ZO: ", arr.start, arr.end);
   };
 
   return (
@@ -58,7 +97,15 @@ const TrendViewer = ({ data, loading, called, error }) => {
         signalFilter={signalFilter}
         signalValueFilter={signalValueFilter}
       />
-      <NavButtons signals={signals} setSignals={setSignals} />
+      <NavButtons
+        resetAll={resetAll}
+        panLeftOne={panLeftOne}
+        panRightOne={panRightOne}
+        panLeftMany={panLeftMany}
+        panRightMany={panRightMany}
+        zoomIn={zoomIn}
+        zoomOut={zoomOut}
+      />
       <CurrentValue currentValue={currentValue} />
       <SignalSelection
         signals={signals}

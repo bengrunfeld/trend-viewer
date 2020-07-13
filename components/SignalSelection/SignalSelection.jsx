@@ -27,6 +27,12 @@ const SignalSelection = ({ setSignalFilter, setSignalValueFilter }) => {
     setSignalValueFilter(e.target.value);
   };
 
+  const handleResetAll = e => {
+    e.preventDefault();
+    setInputVal("all");
+    setSignalValueFilter(false);
+  };
+
   return (
     <Well>
       <Selection>
@@ -54,7 +60,7 @@ const SignalSelection = ({ setSignalFilter, setSignalValueFilter }) => {
           placeholder="Select a value"
           onChange={handleInputChange}
         />
-        <ResetButton>Reset</ResetButton>
+        <ResetButton onClick={handleResetAll}>Reset</ResetButton>
       </Selection>
     </Well>
   );
