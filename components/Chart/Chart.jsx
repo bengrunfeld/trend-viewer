@@ -3,8 +3,18 @@ import { ChartContainer, SignalContainer, Point } from "./Chart.styles";
 
 import { scaleLinear } from "d3";
 
-const Chart = ({ signals, setCurrentValue, setChartWidth }) => {
+const Chart = ({
+  signals,
+  setCurrentValue,
+  setChartWidth,
+  signalFilter,
+  signalValueFilter,
+}) => {
   const ref = useRef(null);
+
+  const signal1Filter = signalFilter === "signal1" || signalFilter === "all";
+  const signal2Filter = signalFilter === "signal2" || signalFilter === "all";
+  const signal3Filter = signalFilter === "signal3" || signalFilter === "all";
 
   useEffect(() => {
     setChartWidth(ref?.current?.offsetWidth);
@@ -75,46 +85,66 @@ const Chart = ({ signals, setCurrentValue, setChartWidth }) => {
   return (
     <ChartContainer ref={ref}>
       <SignalContainer>
-        {signals.map((item, i) => {
-          console.log(scaleX(i));
-          return (
-            <Point
-              xPos={scaleX(i)}
-              yPos={scaleVal1(item.value1)}
-              key={item.id}
-              sigNum={0}
-              onMouseEnter={setCurrentValue.bind("", item)}
-            />
-          );
-        })}
+        {signal1Filter &&
+          signals.map((item, i) => {
+            if (
+              signalValueFilter &&
+              parseFloat(item.value1) < parseFloat(signalValueFilter)
+            )
+              return;
+
+            return (
+              <Point
+                xPos={scaleX(i)}
+                yPos={scaleVal1(item.value1)}
+                key={item.id}
+                sigNum={0}
+                onMouseEnter={setCurrentValue.bind("", item)}
+              />
+            );
+          })}
       </SignalContainer>
 
       <SignalContainer>
-        {signals.map((item, i) => {
-          return (
-            <Point
-              xPos={scaleX(i)}
-              yPos={scaleVal2(item.value2)}
-              key={item.id}
-              sigNum={1}
-              onMouseEnter={setCurrentValue.bind("", item)}
-            />
-          );
-        })}
+        {signal2Filter &&
+          signals.map((item, i) => {
+            if (
+              signalValueFilter &&
+              parseFloat(item.value2) < parseFloat(signalValueFilter)
+            )
+              return;
+
+            return (
+              <Point
+                xPos={scaleX(i)}
+                yPos={scaleVal2(item.value2)}
+                key={item.id}
+                sigNum={1}
+                onMouseEnter={setCurrentValue.bind("", item)}
+              />
+            );
+          })}
       </SignalContainer>
 
       <SignalContainer>
-        {signals.map((item, i) => {
-          return (
-            <Point
-              xPos={scaleX(i)}
-              yPos={scaleVal3(item.value3)}
-              key={item.id}
-              sigNum={2}
-              onMouseEnter={setCurrentValue.bind("", item)}
-            />
-          );
-        })}
+        {signal3Filter &&
+          signals.map((item, i) => {
+            if (
+              signalValueFilter &&
+              parseFloat(item.value3) < parseFloat(signalValueFilter)
+            )
+              return;
+
+            return (
+              <Point
+                xPos={scaleX(i)}
+                yPos={scaleVal3(item.value3)}
+                key={item.id}
+                sigNum={2}
+                onMouseEnter={setCurrentValue.bind("", item)}
+              />
+            );
+          })}
       </SignalContainer>
     </ChartContainer>
   );

@@ -1,4 +1,10 @@
-import { ValueContainer, Value, ValueList, Title } from "./CurrentValue.styles";
+import {
+  ValueContainer,
+  Value,
+  ValueList,
+  Title,
+  Indicator,
+} from "./CurrentValue.styles";
 
 const CurrentValue = ({ currentValue }) => {
   const { timestamp, value1, value2, value3 } = currentValue;
@@ -8,9 +14,18 @@ const CurrentValue = ({ currentValue }) => {
       <Title>Hover over a point</Title>
       <ValueList>
         <Value>Timestamp: {timestamp}</Value>
-        <Value>Value 1: {value1}</Value>
-        <Value>Value 2: {value2}</Value>
-        <Value>Value 3: {value3}</Value>
+        <Value>
+          <Indicator signal="value1" />
+          Value 1: {value1}
+        </Value>
+        <Value>
+          <Indicator signal="value2" />
+          Value 2: {value2}
+        </Value>
+        <Value>
+          <Indicator signal="value3" />
+          Value 3: {value3}
+        </Value>
       </ValueList>
     </ValueContainer>
   );

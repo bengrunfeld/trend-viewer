@@ -1,12 +1,12 @@
 # Clostra App
 
-Clostra App
+Clostra App Trend Viewer
 
 ## Installation
 
 Clone to repo to your machine and then run `npm install`.
 
-Once the installation is complete, run the command `npm run dev` and then navigate to `localhost:3000` in your browser. You should now be able to play the game.
+Once the installation is complete, run the command `npm run dev` and then navigate to `localhost:3000` in your browser. You should now be able to use the trend viewer.
 
 ## Tech Stack
 

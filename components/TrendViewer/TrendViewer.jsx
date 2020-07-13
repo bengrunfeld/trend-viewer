@@ -7,6 +7,8 @@ const TrendViewer = ({ data, loading, called, error }) => {
   const [signals, setSignals] = useState(false);
   const [currentValue, setCurrentValue] = useState(false);
   const [chartWidth, setChartWidth] = useState(false);
+  const [signalFilter, setSignalFilter] = useState("all");
+  const [signalValueFilter, setSignalValueFilter] = useState(false);
 
   const initialData = data?.points.slice(0, 10);
 
@@ -53,10 +55,16 @@ const TrendViewer = ({ data, loading, called, error }) => {
         signals={signals}
         setCurrentValue={setCurrentValue}
         setChartWidth={setChartWidth}
+        signalFilter={signalFilter}
+        signalValueFilter={signalValueFilter}
       />
       <NavButtons signals={signals} setSignals={setSignals} />
       <CurrentValue currentValue={currentValue} />
-      <SignalSelection signals={signals} setSignals={setSignals} />
+      <SignalSelection
+        signals={signals}
+        setSignalFilter={setSignalFilter}
+        setSignalValueFilter={setSignalValueFilter}
+      />
     </Viewer>
   );
 };
