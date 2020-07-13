@@ -4,7 +4,7 @@ import { ApolloServer, gql } from "apollo-server-micro";
 import parse from "csv-parse/lib/sync";
 
 const getCsvData = async () => {
-  const content = await fs.readFile("data/ts-data.csv");
+  const content = await fs.readFile("./data/ts-data.csv");
   const records = parse(content);
 
   const data = records.map((item, i) => {
