@@ -32,7 +32,6 @@ const TrendViewer = ({ data, loading, called, error }) => {
   const resetAll = () => {
     setSignals(data?.points.slice(0, 10));
     setArrIndicies({ start: 0, end: 10 });
-    console.log("RA: ", arr.start, arr.end);
   };
 
   const panLeftOne = () => {
@@ -40,7 +39,6 @@ const TrendViewer = ({ data, loading, called, error }) => {
 
     setSignals(data?.points.slice(arr.start - 1, arr.end - 1));
     setArrIndicies({ start: arr.start - 1, end: arr.end - 1 });
-    console.log("PLO: ", arr.start, arr.end);
   };
 
   const panRightOne = () => {
@@ -48,7 +46,6 @@ const TrendViewer = ({ data, loading, called, error }) => {
 
     setSignals(data?.points.slice(arr.start + 1, arr.end + 1));
     setArrIndicies({ start: arr.start + 1, end: arr.end + 1 });
-    console.log("PRO: ", arr.start, arr.end);
   };
 
   const panLeftMany = n => {
@@ -61,8 +58,6 @@ const TrendViewer = ({ data, loading, called, error }) => {
       start: arr.start - signals.length,
       end: arr.end - signals.length,
     });
-
-    console.log("PLM: ", arr.start, arr.end);
   };
 
   const panRightMany = n => {
@@ -75,8 +70,6 @@ const TrendViewer = ({ data, loading, called, error }) => {
       start: arr.start + signals.length,
       end: arr.end + signals.length,
     });
-
-    console.log("PRM: ", arr.start, arr.end);
   };
 
   const zoomIn = n => {
@@ -84,8 +77,6 @@ const TrendViewer = ({ data, loading, called, error }) => {
 
     setSignals(data?.points.slice(arr.start, arr.end - 1));
     setArrIndicies({ start: arr.start, end: arr.end - 1 });
-
-    console.log("ZI: ", arr.start, arr.end);
   };
 
   const zoomOut = n => {
@@ -93,8 +84,6 @@ const TrendViewer = ({ data, loading, called, error }) => {
 
     setSignals(data?.points.slice(arr.start, arr.end + 1));
     setArrIndicies({ start: arr.start, end: arr.end + 1 });
-
-    console.log("ZO: ", arr.start, arr.end);
   };
 
   return (

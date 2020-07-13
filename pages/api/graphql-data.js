@@ -1,10 +1,15 @@
 import { promises as fs } from "fs";
+import path from "path";
+import getConfig from "next/config";
+const { serverRuntimeConfig } = getConfig();
 
 import { ApolloServer, gql } from "apollo-server-micro";
 import parse from "csv-parse/lib/sync";
 
 const getCsvData = async () => {
-  const content = await fs.readFile("./data/ts-data.csv");
+  const content = await fs.readFile(
+    path.join(serverRuntimeConfig.PROJECT_ROOT, "./data/ts-data.csv")
+  );
   const records = parse(content);
 
   const data = records.map((item, i) => {
