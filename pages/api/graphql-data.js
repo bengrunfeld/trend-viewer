@@ -8,7 +8,7 @@ import parse from "csv-parse/lib/sync";
 
 const getCsvData = async () => {
   const content = await fs.readFile(
-    path.join(serverRuntimeConfig.PROJECT_ROOT, "./data/ts-data.csv")
+    path.join(serverRuntimeConfig.PROJECT_ROOT, "./public/ts-data.csv")
   );
   const records = parse(content);
 
