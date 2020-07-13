@@ -24,7 +24,10 @@ const TrendViewer = ({ data, loading, called, error }) => {
   }, [loading, data]);
 
   if (called && loading) return <p>Loading...</p>;
-  if (error) return <p>Error</p>;
+  if (error) {
+    console.log(error);
+    return <p>Error: See output in console</p>;
+  }
 
   const resetAll = () => {
     setSignals(data?.points.slice(0, 10));
