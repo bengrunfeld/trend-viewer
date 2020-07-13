@@ -17,8 +17,8 @@ const NavButtons = ({
 }) => (
   <NavContainer>
     <LeftButtons>
-      <NavButton onClick={panLeftMany}>LL</NavButton>
-      <NavButton onClick={panLeftOne}>L</NavButton>
+      <NavButton onClick={panLeftMany}>&#8678; &#8678;</NavButton>
+      <NavButton onClick={panLeftOne}>&#8678;</NavButton>
     </LeftButtons>
     <CenterButtons>
       <NavButton onClick={resetAll}>Reset All</NavButton>
@@ -26,8 +26,8 @@ const NavButtons = ({
       <NavButton onClick={zoomOut}>Zoom Out</NavButton>
     </CenterButtons>
     <RightButtons>
-      <NavButton onClick={panRightOne}>R</NavButton>
-      <NavButton onClick={panRightMany}>RR</NavButton>
+      <NavButton onClick={panRightOne}>&#8680;</NavButton>
+      <NavButton onClick={panRightMany}>&#8680; &#8680;</NavButton>
     </RightButtons>
   </NavContainer>
 );
