@@ -1,6 +1,12 @@
 import { useState, useEffect } from "react";
 
-import { Chart, CurrentValue, NavButtons, SignalSelection } from "../";
+import {
+  Chart,
+  CurrentValue,
+  NavButtons,
+  SignalSelection,
+  XAxisTicks,
+} from "../";
 import { Viewer } from "./TrendViewer.styles";
 
 const TrendViewer = ({ data, loading, called, error }) => {
@@ -96,6 +102,10 @@ const TrendViewer = ({ data, loading, called, error }) => {
         setChartWidth={setChartWidth}
         signalFilter={signalFilter}
         signalValueFilter={signalValueFilter}
+      />
+      <XAxisTicks
+        timeStart={signals[0]}
+        timeEnd={signals[signals.length - 1]}
       />
       <NavButtons
         resetAll={resetAll}
