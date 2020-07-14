@@ -1,4 +1,4 @@
-const Point = ({ xPos, yPos, key, sigNum, onMouseEnter }) => {
+const Point = ({ xPos, yPos, sigNum, setCurrentValue, item }) => {
   const getColor = sigNum => {
     if (sigNum === 0) return "red";
     if (sigNum === 1) return "green";
@@ -7,9 +7,15 @@ const Point = ({ xPos, yPos, key, sigNum, onMouseEnter }) => {
     throw "Error - signal number not provided";
   };
 
-  console.log(yPos);
-
-  return <circle r="5" cx={xPos} cy={380 - yPos} fill={getColor(sigNum)} />;
+  return (
+    <circle
+      r="5"
+      cx={xPos}
+      cy={380 - yPos}
+      fill={getColor(sigNum)}
+      onMouseEnter={setCurrentValue.bind("", item)}
+    />
+  );
 };
 
 export default Point;
