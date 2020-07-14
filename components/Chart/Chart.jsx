@@ -1,7 +1,8 @@
 import { useRef, useEffect } from "react";
-import { ChartContainer, SignalContainer, Point } from "./Chart.styles";
-
 import { scaleLinear } from "d3";
+
+import { ChartContainer, SignalContainer, SignalWrapper } from "./Chart.styles";
+import { Point } from "./components";
 
 const Chart = ({
   signals,
@@ -32,122 +33,114 @@ const Chart = ({
       .range([10, 970]);
 
   const createYScale = val =>
-    scaleLinear()
-      .domain([val.min, val.max])
-      .range([0, 375]);
+    scaleLinear().domain([val.min, val.max]).range([0, 370]);
 
-  let minMax = {
-    value1: { min: false, max: false },
-    value2: { min: false, max: false },
-    value3: { min: false, max: false },
+  const value1MinMax = {
+    min: Math.min.apply(
+      Math,
+      signals.map(item => item.value1)
+    ),
+    max: Math.max.apply(
+      Math,
+      signals.map(item => item.value1)
+    ),
   };
 
-  // Find the maximum value for each signal
-  signals.forEach((item, i) => {
-    // Set initial vals
-    if (i === 0) {
-      minMax.value1.min = item.value1;
-      minMax.value1.max = item.value1;
-      minMax.value2.min = item.value2;
-      minMax.value2.max = item.value2;
-      minMax.value3.min = item.value3;
-      minMax.value3.max = item.value3;
+  const value2MinMax = {
+    min: Math.min.apply(
+      Math,
+      signals.map(item => item.value2)
+    ),
+    max: Math.max.apply(
+      Math,
+      signals.map(item => item.value2)
+    ),
+  };
 
-      return;
-    }
-
-    // value1
-    minMax.value1.min =
-      item.value1 < minMax.value1.min ? item.value1 : minMax.value1.min;
-
-    minMax.value1.max =
-      item.value1 > minMax.value1.max ? item.value1 : minMax.value1.max;
-
-    // value2
-    minMax.value2.min =
-      item.value2 < minMax.value2.min ? item.value2 : minMax.value2.min;
-
-    minMax.value2.max =
-      item.value2 > minMax.value2.max ? item.value2 : minMax.value2.max;
-
-    // value3
-    minMax.value3.min =
-      item.value3 < minMax.value3.min ? item.value3 : minMax.value3.min;
-
-    minMax.value3.max =
-      item.value3 > minMax.value3.max ? item.value3 : minMax.value3.max;
-  });
+  const value3MinMax = {
+    min: Math.min.apply(
+      Math,
+      signals.map(item => item.value3)
+    ),
+    max: Math.max.apply(
+      Math,
+      signals.map(item => item.value3)
+    ),
+  };
 
   const scaleX = createXScale(signals);
 
-  const scaleVal1 = createYScale(minMax.value1);
-  const scaleVal2 = createYScale(minMax.value2);
-  const scaleVal3 = createYScale(minMax.value3);
+  const scaleVal1 = createYScale(value1MinMax);
+  const scaleVal2 = createYScale(value2MinMax);
+  const scaleVal3 = createYScale(value3MinMax);
 
   return (
     <ChartContainer ref={ref}>
-      <SignalContainer>
-        {signal1Filter &&
-          signals.map((item, i) => {
-            if (
-              signalValueFilter &&
-              parseFloat(item.value1) < parseFloat(signalValueFilter)
-            )
-              return;
+      <SignalWrapper>
+        <g>
+          {signal1Filter &&
+            signals.map((item, i) => {
+              if (
+                signalValueFilter &&
+                parseFloat(item.value1) < parseFloat(signalValueFilter)
+              )
+                return;
 
-            return (
-              <Point
-                xPos={scaleX(i)}
-                yPos={scaleVal1(item.value1)}
-                key={item.id}
-                sigNum={0}
-                onMouseEnter={setCurrentValue.bind("", item)}
-              />
-            );
-          })}
-      </SignalContainer>
+              return (
+                <Point
+                  xPos={scaleX(i)}
+                  yPos={scaleVal1(item.value1)}
+                  key={item.id}
+                  sigNum={0}
+                  setCurrentValue={setCurrentValue}
+                  item={item}
+                />
+              );
+            })}
+        </g>
+        <g>
+          {signal2Filter &&
+            signals.map((item, i) => {
+              if (
+                signalValueFilter &&
+                parseFloat(item.value2) < parseFloat(signalValueFilter)
+              )
+                return;
 
-      <SignalContainer>
-        {signal2Filter &&
-          signals.map((item, i) => {
-            if (
-              signalValueFilter &&
-              parseFloat(item.value2) < parseFloat(signalValueFilter)
-            )
-              return;
+              return (
+                <Point
+                  xPos={scaleX(i)}
+                  yPos={scaleVal2(item.value2)}
+                  key={item.id}
+                  sigNum={1}
+                  setCurrentValue={setCurrentValue}
+                  item={item}
+                />
+              );
+            })}
+        </g>
+        <g>
+          {signal3Filter &&
+            signals.map((item, i) => {
+              if (
+                signalValueFilter &&
+                parseFloat(item.value3) < parseFloat(signalValueFilter)
+              )
+                return;
 
-            return (
-              <Point
-                xPos={scaleX(i)}
-                yPos={scaleVal2(item.value2)}
-                key={item.id}
-                sigNum={1}
-                onMouseEnter={setCurrentValue.bind("", item)}
-              />
-            );
-          })}
-      </SignalContainer>
-
-      <SignalContainer>
-        {signal3Filter &&
-          signals.map((item, i) => {
-            if (
-              signalValueFilter &&
-              parseFloat(item.value3) < parseFloat(signalValueFilter)
-            )
-              return;
-
-            return (
-              <Point
-                xPos={scaleX(i)}
-                yPos={scaleVal3(item.value3)}
-                key={item.id}
-                sigNum={2}
-                onMouseEnter={setCurrentValue.bind("", item)}
-              />
-            );
-          })}
-      </SignalContainer>
+              return (
+                <Point
+                  xPos={scaleX(i)}
+                  yPos={scaleVal3(item.value3)}
+                  key={item.id}
+                  sigNum={2}
+                  setCurrentValue={setCurrentValue}
+                  item={item}
+                />
+              );
+            })}
+        </g>
+      </SignalWrapper>
     </ChartContainer>
   );
 };

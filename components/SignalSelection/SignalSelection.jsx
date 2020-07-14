@@ -29,7 +29,9 @@ const SignalSelection = ({ setSignalFilter, setSignalValueFilter }) => {
 
   const handleResetAll = e => {
     e.preventDefault();
-    setInputVal("all");
+    setInputVal("");
+    setSignal("all");
+    setSignalFilter("all");
     setSignalValueFilter(false);
   };
 

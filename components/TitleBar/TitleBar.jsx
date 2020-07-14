@@ -2,7 +2,7 @@ import { Bar, Title } from "./TitleBar.styles";
 
 const TitleBar = () => (
   <Bar>
-    <Title>Clostra Trend Viewer</Title>
+    <Title>Trend Viewer</Title>
   </Bar>
 );
 
