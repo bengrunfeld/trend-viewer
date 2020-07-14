@@ -8,22 +8,29 @@ export const ChartContainer = styled.div`
   cursor: default;
 `;
 
-export const SignalContainer = styled.div`
-  position: relative;
+export const SignalWrapper = styled.svg`
+  width: 1000px;
+  height: 400px;
 `;
 
-export const Point = styled.div`
-  width: 10px;
-  height: 10px;
-  border-radius: 5px;
-  position: absolute;
-  left: ${({ xPos }) => `${xPos}px`};
-  top: ${({ yPos }) => `${380 - yPos}px`};
-  background: ${({ sigNum }) => {
-    if (sigNum === 0) return "red";
-    if (sigNum === 1) return "green";
-    if (sigNum === 2) return "blue";
-  }};
-`;
+// export const SignalContainer = styled.svg`
+//   position: absolute;
+//   width: 1000px;
+//   height: 400px;
+// `;
 
-// top:
+// export const Point = styled.div`
+//   width: 10px;
+//   height: 10px;
+//   border-radius: 5px;
+//   position: absolute;
+//   left: ${({ xPos }) => `${xPos}px`};
+//   top: ${({ yPos }) => `${380 - yPos}px`};
+//   background: ${({ sigNum }) => {
+//     if (sigNum === 0) return "red";
+//     if (sigNum === 1) return "green";
+//     if (sigNum === 2) return "blue";
+//   }};
+// `;
+
+// // top:
