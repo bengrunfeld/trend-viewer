@@ -1,7 +1,8 @@
 import { useRef, useEffect } from "react";
-import { ChartContainer, SignalContainer, Point } from "./Chart.styles";
-
 import { scaleLinear } from "d3";
+
+import { ChartContainer, SignalContainer, SignalWrapper } from "./Chart.styles";
+import { Point } from "./components";
 
 const Chart = ({
   signals,
@@ -34,7 +35,7 @@ const Chart = ({
       .range([10, 970]);
 
   const createYScale = val =>
-    scaleLinear().domain([val.min, val.max]).range([0, 375]);
+    scaleLinear().domain([val.min, val.max]).range([0, 370]);
 
   let minMax = {
     value1: { min: false, max: false },
@@ -88,7 +89,7 @@ const Chart = ({
 
   return (
     <ChartContainer ref={ref}>
-      <SignalContainer>
+      <SignalWrapper>
         {signal1Filter &&
           signals.map((item, i) => {
             if (
@@ -107,9 +108,7 @@ const Chart = ({
               />
             );
           })}
-      </SignalContainer>
 
-      <SignalContainer>
         {signal2Filter &&
           signals.map((item, i) => {
             if (
@@ -128,9 +127,7 @@ const Chart = ({
               />
             );
           })}
-      </SignalContainer>
 
-      <SignalContainer>
         {signal3Filter &&
           signals.map((item, i) => {
             if (
@@ -149,7 +146,7 @@ const Chart = ({
               />
             );
           })}
-      </SignalContainer>
+      </SignalWrapper>
     </ChartContainer>
   );
 };
