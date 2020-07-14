@@ -12,6 +12,8 @@ const Chart = ({
 }) => {
   const ref = useRef(null);
 
+  console.log("1. SF: ", signalFilter);
+
   const signal1Filter = signalFilter === "signal1" || signalFilter === "all";
   const signal2Filter = signalFilter === "signal2" || signalFilter === "all";
   const signal3Filter = signalFilter === "signal3" || signalFilter === "all";
@@ -32,9 +34,7 @@ const Chart = ({
       .range([10, 970]);
 
   const createYScale = val =>
-    scaleLinear()
-      .domain([val.min, val.max])
-      .range([0, 375]);
+    scaleLinear().domain([val.min, val.max]).range([0, 375]);
 
   let minMax = {
     value1: { min: false, max: false },
@@ -77,6 +77,8 @@ const Chart = ({
     minMax.value3.max =
       item.value3 > minMax.value3.max ? item.value3 : minMax.value3.max;
   });
+
+  console.log(minMax);
 
   const scaleX = createXScale(signals);
 
