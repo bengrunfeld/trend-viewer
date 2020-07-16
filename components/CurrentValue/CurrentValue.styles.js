@@ -9,10 +9,23 @@ export const ValueContainer = styled.div`
   flex-direction: column;
 `;
 
+export const ValueList = styled.div`
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+
+  > * {
+    padding: 10px 0;
+  }
+
+  @media screen and (min-width: ${({ theme }) => theme.size.desktop}) {
+    flex-direction: row;
+  }
+`;
+
 export const Value = styled.span`
   display: inline-block;
   font-fize: 14px;
-  padding: 3px;
   font-family: verdana;
 `;
 
@@ -20,7 +33,9 @@ export const Indicator = styled.span`
   width: 15px;
   height: 15px;
   display: inline-block;
-  margin-right: 3px;
+  margin-right: 10px;
+  position: relative;
+  top: 2px;
   background: ${({ signal }) => {
     if (signal === "value1") return "red";
     if (signal === "value2") return "green";
@@ -33,9 +48,4 @@ export const Title = styled.h2`
   font-size: 18px;
   padding: 10px 0 13px 0;
   font-family: verdana;
-`;
-
-export const ValueList = styled.div`
-  display: flex;
-  justify-content: space-between;
 `;
