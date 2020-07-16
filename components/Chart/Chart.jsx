@@ -26,20 +26,21 @@ const Chart = ({
   const signal3Filter = signalFilter === "signal3" || signalFilter === "all";
 
   useEffect(() => {
-    setChartWidth(ref?.current?.offsetWidth);
+    setChartWidth(ref?.current?.offsetWidth || 1000);
 
     window.addEventListener("resize", () => {
       if (ref?.current?.offsetWidth) setChartWidth(ref.current.offsetWidth);
-      console.log("--->> ", ref?.current?.offsetWidth);
     });
   }, []);
 
   if (!signals) return <div></div>;
 
-  const createXScale = signals =>
-    scaleLinear()
+  const createXScale = signals => {
+    console.log("createXScale => ", chartWidth);
+    return scaleLinear()
       .domain([0, signals.length - 1])
-      .range([10, 970]);
+      .range([10, chartWidth - 30]);
+  };
 
   const createYScale = val =>
     scaleLinear().domain([val.min, val.max]).range([0, 370]);
@@ -53,7 +54,7 @@ const Chart = ({
   return (
     <ChartContainer ref={ref}>
       <YAxis signalMinMaxes={signalMinMaxes} currentValue={currentValue} />
-      <SignalWrapper>
+      <SignalWrapper chartWidth={chartWidth}>
         <g>
           {signal1Filter &&
             signals.map((item, i) => {

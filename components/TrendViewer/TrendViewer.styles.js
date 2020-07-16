@@ -6,8 +6,12 @@ export const Viewer = styled.div`
   align-items: center;
 
   > * {
-    width: 100%;
+    width: 95%;
     max-width: 1000px;
     margin-top: 25px;
+
+    @media screen and (min-width: ${({ theme }) => theme.size.desktop}) {
+      width: 100%;
+    }
   }
 `;
