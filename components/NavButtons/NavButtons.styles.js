@@ -10,7 +10,9 @@ export const NavContainer = styled.div`
 
 export const LeftButtons = styled.div``;
 
-export const CenterButtons = styled.div``;
+export const CenterButtons = styled.div`
+  text-align: center;
+`;
 
 export const RightButtons = styled.div`
   text-align: end;
