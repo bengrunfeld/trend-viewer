@@ -9,7 +9,7 @@ const Point = ({ xPos, yPos, sigNum, setCurrentValue, item }) => {
 
   return (
     <circle
-      r="5"
+      r="6"
       cx={xPos}
       cy={380 - yPos}
       fill={getColor(sigNum)}

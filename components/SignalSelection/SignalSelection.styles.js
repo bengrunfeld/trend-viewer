@@ -6,7 +6,17 @@ export const Well = styled.div`
   padding: 10px 30px 15px 30px;
   box-sizing: border-box;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  align-items: space-between;
+
+  > :first-child {
+    padding-bottom: 20px;
+  }
+
+  @media screen and (min-width: ${({ theme }) => theme.size.desktop}) {
+    flex-direction: row;
+    justify-content: space-between;
+  }
 `;
 
 export const Select = styled.select`
