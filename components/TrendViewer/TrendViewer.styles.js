@@ -4,6 +4,7 @@ export const Viewer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-top: 60px;
 
   > * {
     width: 95%;

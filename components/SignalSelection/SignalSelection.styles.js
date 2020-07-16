@@ -20,15 +20,24 @@ export const Well = styled.div`
 `;
 
 export const Select = styled.select`
-  padding: 5px;
+  padding: 10px;
+
+  border: none;
+  appearance: none;
 `;
 
 export const Input = styled.input`
-  padding: 5px;
+  padding: 10px;
+
+  border: none;
+  appearance: none;
 `;
 
 export const ResetButton = styled.button`
-  padding: 5px;
+  padding: 10px;
+
+  border: none;
+  appearance: none;
 `;
 
 export const Selection = styled.div`
