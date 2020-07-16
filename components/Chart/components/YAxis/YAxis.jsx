@@ -8,12 +8,18 @@ import {
   TickWrapper,
 } from "./YAxis.styles.js";
 
-const YAxis = ({}) => {
+const YAxis = ({ signalMinMaxes, currentValue }) => {
+  if (!currentValue) return null;
+
+  const key = Object.keys(signalMinMaxes)[currentValue.sigNum];
+
+  const minMax = signalMinMaxes[key];
+
   return (
     <AxisContainer>
       <TickWrapper>
         <TickContainer>
-          <TickValue>555555</TickValue>
+          <TickValue>{minMax.max}</TickValue>
           <Tick>
             <TopTick
               x1="0"
@@ -27,7 +33,7 @@ const YAxis = ({}) => {
       </TickWrapper>
       <TickWrapper>
         <TickContainer>
-          <TickValue>5</TickValue>
+          <TickValue>{minMax.min}</TickValue>
           <Tick>
             <BottomTick
               x1="0"

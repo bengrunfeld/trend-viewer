@@ -29,6 +29,25 @@ const TrendViewer = ({ data, loading, called, error }) => {
     return <p>Error: See output in console</p>;
   }
 
+  const findMinMax = (signalId, signals) => {
+    return {
+      min: Math.min.apply(
+        Math,
+        signals.map(item => item[signalId])
+      ),
+      max: Math.max.apply(
+        Math,
+        signals.map(item => item[signalId])
+      ),
+    };
+  };
+
+  const signalMinMaxes = signals && {
+    signal1: findMinMax("value1", signals),
+    signal2: findMinMax("value2", signals),
+    signal3: findMinMax("value3", signals),
+  };
+
   const resetAll = () => {
     setSignals(data?.points.slice(0, 10));
     setArrIndicies({ start: 0, end: 10 });
@@ -90,6 +109,8 @@ const TrendViewer = ({ data, loading, called, error }) => {
     <Viewer>
       <Chart
         signals={signals}
+        currentValue={currentValue}
+        signalMinMaxes={signalMinMaxes}
         setCurrentValue={setCurrentValue}
         setChartWidth={setChartWidth}
         signalFilter={signalFilter}
