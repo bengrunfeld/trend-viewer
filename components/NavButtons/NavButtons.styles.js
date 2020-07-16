@@ -3,9 +3,6 @@ import styled from "styled-components";
 export const NavContainer = styled.div`
   display: flex;
   justify-content: space-between;
-
-  > * {
-  }
 `;
 
 export const LeftButtons = styled.div``;
@@ -21,4 +18,6 @@ export const RightButtons = styled.div`
 export const NavButton = styled.button`
   margin: 10px 5px;
   padding: 5px 8px;
+
+  appearance: none;
 `;
