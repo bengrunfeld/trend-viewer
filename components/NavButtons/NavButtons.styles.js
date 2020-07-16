@@ -20,4 +20,5 @@ export const RightButtons = styled.div`
 
 export const NavButton = styled.button`
   margin: 10px 5px;
+  padding: 5px 8px;
 `;
