@@ -21,7 +21,7 @@ export const Well = styled.div`
 
 export const Select = styled.select`
   padding: 10px;
-
+  background-color: ${({ theme }) => theme.colors.white};
   border: none;
   appearance: none;
 
