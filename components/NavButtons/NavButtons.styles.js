@@ -8,19 +8,12 @@ export const NavContainer = styled.div`
   }
 `;
 
-export const LeftButtons = styled.div`
-  display: flex;
-  justify-content: flex-start;
-`;
+export const LeftButtons = styled.div``;
 
-export const CenterButtons = styled.div`
-  display: flex;
-  justify-content: center;
-`;
+export const CenterButtons = styled.div``;
 
 export const RightButtons = styled.div`
-  display: flex;
-  justify-content: flex-end;
+  text-align: end;
 `;
 
 export const NavButton = styled.button`
