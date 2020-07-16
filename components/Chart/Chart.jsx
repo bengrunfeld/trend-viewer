@@ -1,8 +1,13 @@
 import { useRef, useEffect } from "react";
 import { scaleLinear } from "d3";
 
-import { ChartContainer, SignalContainer, SignalWrapper } from "./Chart.styles";
-import { Point } from "./components";
+import {
+  ChartAxisContainer,
+  ChartContainer,
+  SignalContainer,
+  SignalWrapper,
+} from "./Chart.styles";
+import { Point, YAxis } from "./components";
 
 const Chart = ({
   signals,
@@ -75,73 +80,76 @@ const Chart = ({
   const scaleVal3 = createYScale(value3MinMax);
 
   return (
-    <ChartContainer ref={ref}>
-      <SignalWrapper>
-        <g>
-          {signal1Filter &&
-            signals.map((item, i) => {
-              if (
-                signalValueFilter &&
-                parseFloat(item.value1) < parseFloat(signalValueFilter)
-              )
-                return;
+    <ChartAxisContainer>
+      <YAxis />
+      <ChartContainer ref={ref}>
+        <SignalWrapper>
+          <g>
+            {signal1Filter &&
+              signals.map((item, i) => {
+                if (
+                  signalValueFilter &&
+                  parseFloat(item.value1) < parseFloat(signalValueFilter)
+                )
+                  return;
 
-              return (
-                <Point
-                  xPos={scaleX(i)}
-                  yPos={scaleVal1(item.value1)}
-                  key={item.id}
-                  sigNum={0}
-                  setCurrentValue={setCurrentValue}
-                  item={item}
-                />
-              );
-            })}
-        </g>
-        <g>
-          {signal2Filter &&
-            signals.map((item, i) => {
-              if (
-                signalValueFilter &&
-                parseFloat(item.value2) < parseFloat(signalValueFilter)
-              )
-                return;
+                return (
+                  <Point
+                    xPos={scaleX(i)}
+                    yPos={scaleVal1(item.value1)}
+                    key={item.id}
+                    sigNum={0}
+                    setCurrentValue={setCurrentValue}
+                    item={item}
+                  />
+                );
+              })}
+          </g>
+          <g>
+            {signal2Filter &&
+              signals.map((item, i) => {
+                if (
+                  signalValueFilter &&
+                  parseFloat(item.value2) < parseFloat(signalValueFilter)
+                )
+                  return;
 
-              return (
-                <Point
-                  xPos={scaleX(i)}
-                  yPos={scaleVal2(item.value2)}
-                  key={item.id}
-                  sigNum={1}
-                  setCurrentValue={setCurrentValue}
-                  item={item}
-                />
-              );
-            })}
-        </g>
-        <g>
-          {signal3Filter &&
-            signals.map((item, i) => {
-              if (
-                signalValueFilter &&
-                parseFloat(item.value3) < parseFloat(signalValueFilter)
-              )
-                return;
+                return (
+                  <Point
+                    xPos={scaleX(i)}
+                    yPos={scaleVal2(item.value2)}
+                    key={item.id}
+                    sigNum={1}
+                    setCurrentValue={setCurrentValue}
+                    item={item}
+                  />
+                );
+              })}
+          </g>
+          <g>
+            {signal3Filter &&
+              signals.map((item, i) => {
+                if (
+                  signalValueFilter &&
+                  parseFloat(item.value3) < parseFloat(signalValueFilter)
+                )
+                  return;
 
-              return (
-                <Point
-                  xPos={scaleX(i)}
-                  yPos={scaleVal3(item.value3)}
-                  key={item.id}
-                  sigNum={2}
-                  setCurrentValue={setCurrentValue}
-                  item={item}
-                />
-              );
-            })}
-        </g>
-      </SignalWrapper>
-    </ChartContainer>
+                return (
+                  <Point
+                    xPos={scaleX(i)}
+                    yPos={scaleVal3(item.value3)}
+                    key={item.id}
+                    sigNum={2}
+                    setCurrentValue={setCurrentValue}
+                    item={item}
+                  />
+                );
+              })}
+          </g>
+        </SignalWrapper>
+      </ChartContainer>
+    </ChartAxisContainer>
   );
 };
 
