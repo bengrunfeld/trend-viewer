@@ -17,10 +17,6 @@ const Point = ({ xPos, yPos, sigNum, setCurrentValue, item }) => {
         "",
         Object.assign({}, item, { sigNum })
       )}
-      onTouchStart={setCurrentValue.bind(
-        "",
-        Object.assign({}, item, { sigNum })
-      )}
     />
   );
 };
