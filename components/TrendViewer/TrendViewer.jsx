@@ -7,12 +7,12 @@ import {
   SignalSelection,
   XAxisTicks,
 } from "../";
-import { Viewer } from "./TrendViewer.styles";
+
+import { Viewer, Message } from "./TrendViewer.styles";
 
 const TrendViewer = ({ data, loading, called, error }) => {
   const [signals, setSignals] = useState(false);
   const [currentValue, setCurrentValue] = useState(false);
-  const [chartWidth, setChartWidth] = useState(false);
   const [signalFilter, setSignalFilter] = useState("all");
   const [signalValueFilter, setSignalValueFilter] = useState(false);
   const [arr, setArrIndicies] = useState({ start: 0, end: 10 });
@@ -23,11 +23,12 @@ const TrendViewer = ({ data, loading, called, error }) => {
     }
   }, [loading, data]);
 
-  if (called && loading) return <p>Loading...</p>;
   if (error) {
     console.log(error);
-    return <p>Error: See output in console</p>;
+    return <Message>Error: See output in console</Message>;
   }
+
+  if (!data || (called && loading)) return <Message>Loading...</Message>;
 
   const findMinMax = (signalId, signals) => {
     return {
@@ -112,7 +113,6 @@ const TrendViewer = ({ data, loading, called, error }) => {
         currentValue={currentValue}
         signalMinMaxes={signalMinMaxes}
         setCurrentValue={setCurrentValue}
-        setChartWidth={setChartWidth}
         signalFilter={signalFilter}
         signalValueFilter={signalValueFilter}
       />

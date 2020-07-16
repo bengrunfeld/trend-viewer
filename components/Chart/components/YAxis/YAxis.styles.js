@@ -1,14 +1,18 @@
 import styled from "styled-components";
 
 export const AxisContainer = styled.div`
-  min-width: 20px;
-  height: 371px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: flex-end;
-  position: absolute;
-  left: -21px;
+  display: none;
+
+  @media screen and (min-width: ${({ theme }) => theme.size.desktop}) {
+    min-width: 20px;
+    height: 371px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+    position: absolute;
+    left: -21px;
+  }
 `;
 
 export const TickWrapper = styled.div``;

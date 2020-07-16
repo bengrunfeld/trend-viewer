@@ -19,6 +19,7 @@ const SignalSelection = ({ setSignalFilter, setSignalValueFilter }) => {
     e.preventDefault();
     setSignal(e.target.value);
     setSignalFilter(e.target.value);
+    window.scrollTo(0, 0);
   };
 
   const handleInputChange = e => {
@@ -59,7 +60,7 @@ const SignalSelection = ({ setSignalFilter, setSignalValueFilter }) => {
           type="number"
           step="0.000000001"
           value={inputVal}
-          placeholder="Select a value"
+          placeholder="Type a value here"
           onChange={handleInputChange}
         />
         <ResetButton onClick={handleResetAll}>Reset</ResetButton>

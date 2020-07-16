@@ -9,7 +9,7 @@ const Point = ({ xPos, yPos, sigNum, setCurrentValue, item }) => {
 
   return (
     <circle
-      r="5"
+      r="6.5"
       cx={xPos}
       cy={380 - yPos}
       fill={getColor(sigNum)}
@@ -17,6 +17,7 @@ const Point = ({ xPos, yPos, sigNum, setCurrentValue, item }) => {
         "",
         Object.assign({}, item, { sigNum })
       )}
+      onTouchEnd={setCurrentValue.bind("", Object.assign({}, item, { sigNum }))}
     />
   );
 };

@@ -10,7 +10,7 @@ export const ChartContainer = styled.div`
 `;
 
 export const SignalWrapper = styled.svg`
-  width: 1000px;
+  width: ${({ chartWidth }) => chartWidth || "1000"}px;
   height: 400px;
 `;
 
