@@ -39,7 +39,7 @@ export const Select = styled.select`
 
 export const Input = styled.input`
   padding: 10px;
-
+  font-size: 16px;
   border: none;
   appearance: none;
 `;
