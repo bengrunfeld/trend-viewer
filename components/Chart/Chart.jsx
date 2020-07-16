@@ -80,76 +80,74 @@ const Chart = ({
   const scaleVal3 = createYScale(value3MinMax);
 
   return (
-    <ChartAxisContainer>
+    <ChartContainer ref={ref}>
       <YAxis />
-      <ChartContainer ref={ref}>
-        <SignalWrapper>
-          <g>
-            {signal1Filter &&
-              signals.map((item, i) => {
-                if (
-                  signalValueFilter &&
-                  parseFloat(item.value1) < parseFloat(signalValueFilter)
-                )
-                  return;
+      <SignalWrapper>
+        <g>
+          {signal1Filter &&
+            signals.map((item, i) => {
+              if (
+                signalValueFilter &&
+                parseFloat(item.value1) < parseFloat(signalValueFilter)
+              )
+                return;
 
-                return (
-                  <Point
-                    xPos={scaleX(i)}
-                    yPos={scaleVal1(item.value1)}
-                    key={item.id}
-                    sigNum={0}
-                    setCurrentValue={setCurrentValue}
-                    item={item}
-                  />
-                );
-              })}
-          </g>
-          <g>
-            {signal2Filter &&
-              signals.map((item, i) => {
-                if (
-                  signalValueFilter &&
-                  parseFloat(item.value2) < parseFloat(signalValueFilter)
-                )
-                  return;
+              return (
+                <Point
+                  xPos={scaleX(i)}
+                  yPos={scaleVal1(item.value1)}
+                  key={item.id}
+                  sigNum={0}
+                  setCurrentValue={setCurrentValue}
+                  item={item}
+                />
+              );
+            })}
+        </g>
+        <g>
+          {signal2Filter &&
+            signals.map((item, i) => {
+              if (
+                signalValueFilter &&
+                parseFloat(item.value2) < parseFloat(signalValueFilter)
+              )
+                return;
 
-                return (
-                  <Point
-                    xPos={scaleX(i)}
-                    yPos={scaleVal2(item.value2)}
-                    key={item.id}
-                    sigNum={1}
-                    setCurrentValue={setCurrentValue}
-                    item={item}
-                  />
-                );
-              })}
-          </g>
-          <g>
-            {signal3Filter &&
-              signals.map((item, i) => {
-                if (
-                  signalValueFilter &&
-                  parseFloat(item.value3) < parseFloat(signalValueFilter)
-                )
-                  return;
+              return (
+                <Point
+                  xPos={scaleX(i)}
+                  yPos={scaleVal2(item.value2)}
+                  key={item.id}
+                  sigNum={1}
+                  setCurrentValue={setCurrentValue}
+                  item={item}
+                />
+              );
+            })}
+        </g>
+        <g>
+          {signal3Filter &&
+            signals.map((item, i) => {
+              if (
+                signalValueFilter &&
+                parseFloat(item.value3) < parseFloat(signalValueFilter)
+              )
+                return;
 
-                return (
-                  <Point
-                    xPos={scaleX(i)}
-                    yPos={scaleVal3(item.value3)}
-                    key={item.id}
-                    sigNum={2}
-                    setCurrentValue={setCurrentValue}
-                    item={item}
-                  />
-                );
-              })}
-          </g>
-        </SignalWrapper>
-      </ChartContainer>
-    </ChartAxisContainer>
+              return (
+                <Point
+                  xPos={scaleX(i)}
+                  yPos={scaleVal3(item.value3)}
+                  key={item.id}
+                  sigNum={2}
+                  setCurrentValue={setCurrentValue}
+                  item={item}
+                />
+              );
+            })}
+        </g>
+      </SignalWrapper>
+    </ChartContainer>
   );
 };
 
