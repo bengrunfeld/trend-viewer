@@ -7,16 +7,17 @@ const Point = ({ xPos, yPos, sigNum, setCurrentValue, item }) => {
     throw "Error - signal number not provided";
   };
 
+  const updateCurrentValue = () =>
+    setCurrentValue.bind("", Object.assign({}, item, { sigNum }));
+
   return (
     <circle
       r="5"
       cx={xPos}
       cy={380 - yPos}
       fill={getColor(sigNum)}
-      onMouseEnter={setCurrentValue.bind(
-        "",
-        Object.assign({}, item, { sigNum })
-      )}
+      onMouseEnter={updateCurrentValue}
+      onClick={updateCurrentValue}
     />
   );
 };

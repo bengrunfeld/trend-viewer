@@ -35,12 +35,10 @@ const Chart = ({
 
   if (!signals) return <div></div>;
 
-  const createXScale = signals => {
-    console.log("createXScale => ", chartWidth);
-    return scaleLinear()
+  const createXScale = signals =>
+    scaleLinear()
       .domain([0, signals.length - 1])
       .range([10, chartWidth - 30]);
-  };
 
   const createYScale = val =>
     scaleLinear().domain([val.min, val.max]).range([0, 370]);
