@@ -24,6 +24,7 @@ export const Select = styled.select`
   background-color: ${({ theme }) => theme.colors.white};
   border: none;
   appearance: none;
+  font-size: 16px;
 
   background-repeat: no-repeat;
   background-size: 10px auto;

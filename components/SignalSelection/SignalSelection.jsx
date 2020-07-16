@@ -19,7 +19,6 @@ const SignalSelection = ({ setSignalFilter, setSignalValueFilter }) => {
     e.preventDefault();
     setSignal(e.target.value);
     setSignalFilter(e.target.value);
-    document.body.style.zoom = 1.0;
     window.scrollTo(0, 0);
   };
 
