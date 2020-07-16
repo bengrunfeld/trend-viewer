@@ -6,6 +6,7 @@ export const Bar = styled.div`
   z-index: 100;
   background: ${({ theme }) => theme.colors.blue};
   position: fixed;
+  top: 0;
 `;
 
 export const Title = styled.h1`

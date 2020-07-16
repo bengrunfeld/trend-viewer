@@ -16,3 +16,11 @@ export const Viewer = styled.div`
     }
   }
 `;
+
+export const Message = styled.p`
+  position: absolute;
+  top: 40px;
+  font-family: verdana;
+  font-size: 16px;
+  padding-left: 20px;
+`;
