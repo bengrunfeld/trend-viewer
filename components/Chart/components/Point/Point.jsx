@@ -13,7 +13,10 @@ const Point = ({ xPos, yPos, sigNum, setCurrentValue, item }) => {
       cx={xPos}
       cy={380 - yPos}
       fill={getColor(sigNum)}
-      onMouseEnter={setCurrentValue.bind("", item)}
+      onMouseEnter={setCurrentValue.bind(
+        "",
+        Object.assign({}, item, { sigNum })
+      )}
     />
   );
 };

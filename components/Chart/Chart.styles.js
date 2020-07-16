@@ -6,6 +6,7 @@ export const ChartContainer = styled.div`
   border-radius: 3px;
   box-sizing: border-box;
   cursor: default;
+  position: relative;
 `;
 
 export const SignalWrapper = styled.svg`

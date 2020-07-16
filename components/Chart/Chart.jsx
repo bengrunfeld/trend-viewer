@@ -1,14 +1,21 @@
 import { useRef, useEffect } from "react";
 import { scaleLinear } from "d3";
 
-import { ChartContainer, SignalContainer, SignalWrapper } from "./Chart.styles";
-import { Point } from "./components";
+import {
+  ChartAxisContainer,
+  ChartContainer,
+  SignalContainer,
+  SignalWrapper,
+} from "./Chart.styles";
+import { Point, YAxis } from "./components";
 
 const Chart = ({
-  signals,
-  setCurrentValue,
   setChartWidth,
+  currentValue,
+  setCurrentValue,
   signalFilter,
+  signalMinMaxes,
+  signals,
   signalValueFilter,
 }) => {
   const ref = useRef(null);
@@ -35,47 +42,15 @@ const Chart = ({
   const createYScale = val =>
     scaleLinear().domain([val.min, val.max]).range([0, 370]);
 
-  const value1MinMax = {
-    min: Math.min.apply(
-      Math,
-      signals.map(item => item.value1)
-    ),
-    max: Math.max.apply(
-      Math,
-      signals.map(item => item.value1)
-    ),
-  };
-
-  const value2MinMax = {
-    min: Math.min.apply(
-      Math,
-      signals.map(item => item.value2)
-    ),
-    max: Math.max.apply(
-      Math,
-      signals.map(item => item.value2)
-    ),
-  };
-
-  const value3MinMax = {
-    min: Math.min.apply(
-      Math,
-      signals.map(item => item.value3)
-    ),
-    max: Math.max.apply(
-      Math,
-      signals.map(item => item.value3)
-    ),
-  };
-
   const scaleX = createXScale(signals);
 
-  const scaleVal1 = createYScale(value1MinMax);
-  const scaleVal2 = createYScale(value2MinMax);
-  const scaleVal3 = createYScale(value3MinMax);
+  const scaleVal1 = createYScale(signalMinMaxes.signal1);
+  const scaleVal2 = createYScale(signalMinMaxes.signal2);
+  const scaleVal3 = createYScale(signalMinMaxes.signal3);
 
   return (
     <ChartContainer ref={ref}>
+      <YAxis signalMinMaxes={signalMinMaxes} currentValue={currentValue} />
       <SignalWrapper>
         <g>
           {signal1Filter &&
