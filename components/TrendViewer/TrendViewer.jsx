@@ -12,7 +12,6 @@ import { Viewer } from "./TrendViewer.styles";
 const TrendViewer = ({ data, loading, called, error }) => {
   const [signals, setSignals] = useState(false);
   const [currentValue, setCurrentValue] = useState(false);
-  const [chartWidth, setChartWidth] = useState(false);
   const [signalFilter, setSignalFilter] = useState("all");
   const [signalValueFilter, setSignalValueFilter] = useState(false);
   const [arr, setArrIndicies] = useState({ start: 0, end: 10 });
@@ -23,11 +22,12 @@ const TrendViewer = ({ data, loading, called, error }) => {
     }
   }, [loading, data]);
 
-  if (called && loading) return <p>Loading...</p>;
   if (error) {
     console.log(error);
     return <p>Error: See output in console</p>;
   }
+
+  if (!data || (called && loading)) return <p>Loading...</p>;
 
   const findMinMax = (signalId, signals) => {
     return {
@@ -112,7 +112,6 @@ const TrendViewer = ({ data, loading, called, error }) => {
         currentValue={currentValue}
         signalMinMaxes={signalMinMaxes}
         setCurrentValue={setCurrentValue}
-        setChartWidth={setChartWidth}
         signalFilter={signalFilter}
         signalValueFilter={signalValueFilter}
       />

@@ -1,4 +1,4 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import { scaleLinear } from "d3";
 
 import {
@@ -10,7 +10,6 @@ import {
 import { Point, YAxis } from "./components";
 
 const Chart = ({
-  setChartWidth,
   currentValue,
   setCurrentValue,
   signalFilter,
@@ -18,6 +17,8 @@ const Chart = ({
   signals,
   signalValueFilter,
 }) => {
+  const [chartWidth, setChartWidth] = useState(false);
+
   const ref = useRef(null);
 
   const signal1Filter = signalFilter === "signal1" || signalFilter === "all";
@@ -28,7 +29,8 @@ const Chart = ({
     setChartWidth(ref?.current?.offsetWidth);
 
     window.addEventListener("resize", () => {
-      if (ref?.current?.offsetWidth) setChartWidth(ref?.current?.offsetWidth);
+      if (ref?.current?.offsetWidth) setChartWidth(ref.current.offsetWidth);
+      console.log("--->> ", ref?.current?.offsetWidth);
     });
   }, []);
 
