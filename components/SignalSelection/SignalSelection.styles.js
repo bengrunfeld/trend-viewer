@@ -13,10 +13,6 @@ export const Well = styled.div`
     padding-bottom: 20px;
   }
 
-  > * {
-    appearance: none;
-  }
-
   @media screen and (min-width: ${({ theme }) => theme.size.desktop}) {
     flex-direction: row;
     justify-content: space-between;
