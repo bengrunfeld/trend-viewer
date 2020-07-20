@@ -6,6 +6,13 @@ import {
   Indicator,
 } from "./CurrentValue.styles";
 
+interface CurrentValue {
+  timestamp: string;
+  value1: string;
+  value2: string;
+  value3: string;
+}
+
 const CurrentValue = ({ currentValue }) => {
   const { timestamp, value1, value2, value3 } = currentValue;
 
