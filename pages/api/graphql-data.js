@@ -41,11 +41,7 @@ const typeDefs = gql`
 
 const resolvers = {
   Query: {
-    points: async (parent, args) => {
-      const data = await getCsvData();
-
-      return data;
-    },
+    points: async (parent, args) => await getCsvData(),
   },
 };
 
