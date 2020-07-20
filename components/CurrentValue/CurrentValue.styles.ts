@@ -29,7 +29,14 @@ export const Value = styled.span`
   font-family: verdana;
 `;
 
-export const Indicator = styled.span`
+type Signal = {
+  signal: string,
+};
+
+export const Indicator =
+  styled.span <
+  Signal >
+  `
   width: 15px;
   height: 15px;
   display: inline-block;

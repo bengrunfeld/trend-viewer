@@ -9,7 +9,11 @@ export const ChartContainer = styled.div`
   position: relative;
 `;
 
-export const SignalWrapper = styled.svg`
+type ChartWidth = {
+  chartWidth: number;
+};
+
+export const SignalWrapper = styled.svg<ChartWidth>`
   width: ${({ chartWidth }) => chartWidth || "1000"}px;
   height: 400px;
 `;
