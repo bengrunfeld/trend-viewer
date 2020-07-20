@@ -5,9 +5,17 @@ import { gql } from "apollo-boost";
 import { TrendViewer, TitleBar } from "../";
 import { PageLayout } from "./App.styles";
 
+interface DataPoints {
+  id: string;
+  timestamp: string;
+  value1: string;
+  value2: string;
+  value3: string;
+}
+
 const GET_DATA_POINTS = gql`
-  query DataPoints($start: String, $end: String) {
-    points(startDateTime: $start, endDateTime: $end) {
+  query DataPoints {
+    points {
       id
       timestamp
       value1
@@ -18,15 +26,12 @@ const GET_DATA_POINTS = gql`
 `;
 
 const App = () => {
-  const [getDataPoints, { called, loading, error, data }] = useLazyQuery(
-    GET_DATA_POINTS,
-    {
-      variables: { start: "false", end: "false" },
-    }
-  );
+  const [getDataPoints, { called, loading, error, data }] = useLazyQuery<
+    DataPoints
+  >(GET_DATA_POINTS);
 
   useEffect(() => {
-    getDataPoints({ variables: { start: "now" } });
+    getDataPoints();
   }, []);
 
   return (

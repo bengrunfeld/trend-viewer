@@ -35,17 +35,21 @@ const typeDefs = gql`
   }
 
   type Query {
-    points(startDateTime: String, endDateTime: String): [Point]
+    points: [Point]
   }
 `;
 
+interface Point {
+  id: string;
+  timestamp: string;
+  value1: string;
+  value2: string;
+  value3: string;
+}
+
 const resolvers = {
   Query: {
-    points: async (parent, args) => {
-      const data = await getCsvData();
-
-      return data;
-    },
+    points: async (parent, args): Promise<Array<Point>> => await getCsvData(),
   },
 };
 
