@@ -15,7 +15,7 @@ const TrendViewer = ({ data, loading, called, error }) => {
   const [currentValue, setCurrentValue] = useState(false);
   const [signalFilter, setSignalFilter] = useState("all");
   const [signalValueFilter, setSignalValueFilter] = useState(false);
-  const [arr, setArrIndicies] = useState({ start: 0, end: 10 });
+  const [arr, setArrIndicies] = useState({ start: 0, end: 50 });
 
   useEffect(() => {
     if (!loading && data) {
@@ -52,8 +52,8 @@ const TrendViewer = ({ data, loading, called, error }) => {
   };
 
   const resetAll = () => {
-    setSignals(data?.points.slice(0, 10));
-    setArrIndicies({ start: 0, end: 10 });
+    setSignals(data?.points.slice(0, 50));
+    setArrIndicies({ start: 0, end: 50 });
   };
 
   const panLeftOne = () => {
