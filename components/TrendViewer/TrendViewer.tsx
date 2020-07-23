@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 import {
   Chart,
@@ -15,11 +15,15 @@ const TrendViewer = ({ data, loading, called, error }) => {
   const [currentValue, setCurrentValue] = useState(false);
   const [signalFilter, setSignalFilter] = useState("all");
   const [signalValueFilter, setSignalValueFilter] = useState(false);
-  const [arr, setArrIndicies] = useState({ start: 0, end: 50 });
+  const arr = useRef({ start: 0, end: 50 });
+
+  const setArrIndicies = obj => {
+    arr.current = obj
+  }
 
   useEffect(() => {
     if (!loading && data) {
-      setSignals(data?.points.slice(arr.start, arr.end));
+      setSignals(data?.points.slice(arr.current.start, arr.current.end));
     }
   }, [loading, data]);
 
@@ -57,55 +61,55 @@ const TrendViewer = ({ data, loading, called, error }) => {
   };
 
   const panLeftOne = () => {
-    if (arr.start === 0) return;
+    if (arr.current.start === 0) return;
 
-    setSignals(data?.points.slice(arr.start - 1, arr.end - 1));
-    setArrIndicies({ start: arr.start - 1, end: arr.end - 1 });
+    setSignals(data?.points.slice(arr.current.start - 1, arr.current.end - 1));
+    setArrIndicies({ start: arr.current.start - 1, end: arr.current.end - 1 });
   };
 
   const panRightOne = () => {
-    if (arr.end === data.length - 1) return;
+    if (arr.current.end === data.length - 1) return;
 
-    setSignals(data?.points.slice(arr.start + 1, arr.end + 1));
-    setArrIndicies({ start: arr.start + 1, end: arr.end + 1 });
+    setSignals(data?.points.slice(arr.current.start + 1, arr.current.end + 1));
+    setArrIndicies({ start: arr.current.start + 1, end: arr.current.end + 1 });
   };
 
   const panLeftMany = n => {
-    if (arr.start - signals.length < 0) return;
+    if (arr.current.start - signals.length < 0) return;
 
     setSignals(
-      data?.points.slice(arr.start - signals.length, arr.end - signals.length)
+      data?.points.slice(arr.current.start - signals.length, arr.current.end - signals.length)
     );
     setArrIndicies({
-      start: arr.start - signals.length,
-      end: arr.end - signals.length,
+      start: arr.current.start - signals.length,
+      end: arr.current.end - signals.length,
     });
   };
 
   const panRightMany = n => {
-    if (arr.end + signals.length > data.length - 1) return;
+    if (arr.current.end + signals.length > data.length - 1) return;
 
     setSignals(
-      data?.points.slice(arr.start + signals.length, arr.end + signals.length)
+      data?.points.slice(arr.current.start + signals.length, arr.current.end + signals.length)
     );
     setArrIndicies({
-      start: arr.start + signals.length,
-      end: arr.end + signals.length,
+      start: arr.current.start + signals.length,
+      end: arr.current.end + signals.length,
     });
   };
 
   const zoomIn = n => {
     if (signals.length < 4) return;
 
-    setSignals(data?.points.slice(arr.start, arr.end - 1));
-    setArrIndicies({ start: arr.start, end: arr.end - 1 });
+    setSignals(data?.points.slice(arr.current.start, arr.current.end - 1));
+    setArrIndicies({ start: arr.current.start, end: arr.current.end - 1 });
   };
 
   const zoomOut = n => {
-    if (arr.end === data.length - 1) return;
+    if (arr.current.end === data.length - 1) return;
 
-    setSignals(data?.points.slice(arr.start, arr.end + 1));
-    setArrIndicies({ start: arr.start, end: arr.end + 1 });
+    setSignals(data?.points.slice(arr.current.start, arr.current.end + 1));
+    setArrIndicies({ start: arr.current.start, end: arr.current.end + 1 });
   };
 
   return (
