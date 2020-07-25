@@ -1,6 +1,5 @@
-import { useRef, useEffect, useState } from "react";
-import { scaleLinear } from "d3";
-
+import { useRef, useEffect, useState, useCallback } from "react";
+import { createXScale, createYScale } from "./utils";
 import { ChartContainer, SignalWrapper } from "./Chart.styles";
 import { Point, YAxis } from "./components";
 
@@ -31,15 +30,7 @@ const Chart = ({
 
   if (!signalsExist(signals)) return <div></div>;
 
-  const createXScale = signals =>
-    scaleLinear()
-      .domain([0, signals.length - 1])
-      .range([10, chartWidth - 30]);
-
-  const createYScale = val =>
-    scaleLinear().domain([val.min, val.max]).range([0, 370]);
-
-  const scaleX = createXScale(signals);
+  const scaleX = createXScale(signals, chartWidth);
 
   const scaleVal1 = createYScale(signalMinMaxes.signal1);
   const scaleVal2 = createYScale(signalMinMaxes.signal2);
